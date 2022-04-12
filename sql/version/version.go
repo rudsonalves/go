@@ -14,9 +14,14 @@ func main() {
 		panic(err)
 	}
 
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
 	var version string
 
-	err = db.QueryRow("SELECT VERSINO()").Scan(&version)
+	err = db.QueryRow("SELECT VERSION()").Scan(&version)
 	if err != nil {
 		panic(err)
 	}
