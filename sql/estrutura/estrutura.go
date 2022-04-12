@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -20,11 +19,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println(exec(db, "SHOW DATABASES"))
-	fmt.Println(exec(db, "SELECT VERSION()"))
-	exec(db, "CREATE DATABASE IF NOT EXISTS cursogo")
-
 	// defer fecha o banco de dados ao final da função main
 	defer db.Close()
+
+	exec(db, "CREATE DATABASE IF NOT EXISTS cursogo")
+	exec(db, "USE cursogo")
+	exec(db, `CREATE TABLE IF NOT EXISTS usuarios (
+		id INTEGER AUTO_INCREMENT,
+		nome VARCHAR(80),
+		PRIMARY KEY (id)
+	)`)
+
 }

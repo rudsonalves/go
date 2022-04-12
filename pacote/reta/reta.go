@@ -6,7 +6,7 @@ import "math"
 // Inicializando com letra minúscula é PRIVADO (visível apenas dentro do pacote)!
 
 // Exemplo:
-// Pont - é público
+// Ponto - é público
 // ponto ou _Ponto - é privado
 
 // Ponto representa uma coordenada no plano
