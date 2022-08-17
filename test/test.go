@@ -2,9 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
-	fmt.Printf("os.ErrExist: %v\n", os.ErrExist)
+	a := [][]int{}
+	b := []int{}
+
+	b = append(b, 1, 2, 3, 4)
+	a = append(a, b)
+	a = append(a, b)
+	fmt.Println(a)
 }
