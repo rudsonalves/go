@@ -7,30 +7,55 @@ import (
 	"os"
 )
 
+type PhoneItem struct {
+	Place  string `json:"type"`
+	Number string `json:"number"`
+}
+
+type Register struct {
+	Name     string      `json:"firstName"`
+	LastName string      `json:"lastName"`
+	Alive    bool        `json:"isAlive"`
+	Age      int         `json:"age"`
+	Spouse   string      `json:"spouse"`
+	Children []string    `json:"children"`
+	Contacts []PhoneItem `json:"phoneNumbers"`
+	Address  struct {
+		Street string `json:"streetAddress"`
+		City   string
+		State  string
+		Postal string `json:"postalCode"`
+	}
+}
+
 func main() {
-	fjson, err := os.ReadFile("sample.json")
+	fjs, err := os.ReadFile("sample-4.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var r map[string]interface{}
-	json.Unmarshal(fjson, &r)
-
-	fmt.Printf("Name: %s %s\n", r["firstName"], r["lastName"])
-	fmt.Printf("Age: %0.f\n\n", r["age"])
-
-	address := r["address"].(map[string]interface{})
-
-	streetAddress := address["streetAddress"]
-	city := address["city"]
-	state := address["state"]
-	postalcode := address["postalCode"]
-	fmt.Printf("Address:\n Street: %s\n City: %s\n State: %s\n Postal: %s\n",
-		streetAddress, city, state, postalcode)
-
-	children := r["children"].([]interface{})
-	fmt.Print("\nChildrens:\n")
-	for _, cName := range children {
-		fmt.Printf(" %s\n", cName)
+	reg := Register{}
+	err = json.Unmarshal(fjs, &reg)
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	jsonIndent, err := json.MarshalIndent(reg, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(jsonIndent))
+
+	jsonMarshal, err := json.Marshal(reg)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// err = os.WriteFile("test.json", jsonIndent, 700)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	fmt.Println(string(jsonIndent))
+	fmt.Println("----------------------")
+	fmt.Println(string(jsonMarshal))
 }
