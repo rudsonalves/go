@@ -1,0 +1,22 @@
+{
+    "firstName": "John",
+    "lastName": "Smith",
+    "isAlive": true,
+    "age": 27,
+    "spouse": null,
+    "children": [
+        "Catherine",
+        "Thomas",
+        "Trevor"
+    ],
+    "phoneNumbers": [
+      {
+        "type": "home",
+        "number": "212 555-1234"
+      },
+      {
+        "type": "office",
+        "number": "646 555-4567"
+      }
+    ]
+  }
